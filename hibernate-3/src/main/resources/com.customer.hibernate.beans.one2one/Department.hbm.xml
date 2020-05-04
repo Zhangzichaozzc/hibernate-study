@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.customer.hibernate.beans.one2one.Department" table="tbl_dept">
+        <id name="deptId" type="java.lang.Integer" column="dept_id">
+            <generator class="native"/>
+        </id>
+        <property name="deptName" type="java.lang.String" column="dept_name"/>
+        <many-to-one name="mgr" class="com.customer.hibernate.beans.one2one.Manager" column="mgr_id" unique="true"/>
+    </class>
+</hibernate-mapping>

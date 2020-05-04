@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.customer.hibernate.beans.Order" table="tbl_order">
+        <id name="orderId" type="java.lang.Integer" column="order_id">
+            <generator class="native"/>
+        </id>
+        <property name="orderName" type="java.lang.String" column="order_name"/>
+        <many-to-one name="customer" class="com.customer.hibernate.beans.Customer" column="customer_id"/>
+    </class>
+</hibernate-mapping>

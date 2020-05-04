@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.customer.hibernate.beans.subclass.Person" table="tbl_person" discriminator-value="person">
+        <id name="id" type="java.lang.Integer" column="id">
+            <generator class="native"/>
+        </id>
+        <discriminator column="type" type="java.lang.String"/>
+        <property name="name" type="java.lang.String" column="name"/>
+        <subclass discriminator-value="student" name="com.customer.hibernate.beans.subclass.Student">
+            <property name="school" type="java.lang.String" column="school"/>
+        </subclass>
+    </class>
+</hibernate-mapping>

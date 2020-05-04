@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--连接数据库的基本信息-->
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/hibernate?useUnicode=true&amp;characterEncoding=utf8</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+
+        <!--配置Hibernate 的基本信息-->
+        <!--指定数据库的方言-->
+        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+        <!--在日志中显示生成的 SQL-->
+        <property name="show_sql">true</property>
+
+        <!--在显示SQL的时候进行格式化-->
+        <property name="format_sql">true</property>
+
+        <!--指定自动生成表的策略-->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!--导入 Hibernate 的映射文件-->
+        <mapping resource="com/customer/beans/News.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>

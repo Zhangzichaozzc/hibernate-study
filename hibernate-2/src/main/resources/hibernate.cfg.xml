@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--配置基本连接信息-->
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
+        <property name="connection.url">
+            jdbc:mysql://localhost:3306/hibernate?useUnicode=true&amp;characterEncoding=utf8
+        </property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+
+        <!--c3p0 连接池的配置-->
+        <!--c3p0 连接池的最大连接数-->
+        <property name="c3p0.max_size">10</property>
+        <!--连接池的最小连接数-->
+        <property name="c3p0.min_size">5</property>
+        <!--当连接池中的连接耗尽，但是还没有达到连接池的最大连接数的上线，每次同一时刻获取多少个数据库连接-->
+        <property name="c3p0.acquire_increment">2</property>
+        <!--数据库连接池中的对象在多长时间没有使用的话就销毁，单位是毫秒-->
+        <property name="c3p0.timeout">3000</property>
+        <!--表示连接池检测线程多长时间检测一次池内的所有连接对象是否超时，单位是毫秒，连接池本身不会自己把连接从连接池中移除，
+            而是专门有一个线程按照一定的时间间隔来做这件事，这个线程通过比较连接对象最后一次被使用的时间和当前时间的时间间隔的时间差，
+            和 timeout 做对比，进而决定是否销毁这个链接对象-->
+        <property name="c3p0.idle_test_period">3000</property>
+        <!--缓存 Statement 对象的数量-->
+        <property name="c3p0.max_statements">50</property>
+
+        <!--配置基本信息-->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <!--数据库驱动的版本为 5.1.44 则dialect 必须为 MySQL5InnoDBDialect,如果是 MySQLInnoDBDialect 则会报错-->
+        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+        <property name="hbm2ddl.auto">update</property>
+
+        <!--设置 Hibernate 的事务隔离级别-->
+        <!--2 为 Read Committed-->
+        <property name="connection.isolation">2</property>
+
+        <!--设置 当调用了 delete 方法后， 对象的 OID 为 null-->
+        <property name="use_identifier_rollback">true</property>
+
+        <!--以下两个属性的设置对于 MySQL 是无效的，对Oracle 是有效的-->
+        <!--设定 JDBC 的 Statement 读取数据的时候，每次从数据库中取出的数据的条数-->
+        <property name="jdbc.fetch_size">100</property>
+        <!--设定 JDBC 的对数据库进行批量操作的时候的批次的大小-->
+        <property name="jdbc.batch_size">30</property>
+
+        <!--<mapping resource="com/customer/hibernate/beans/News.hbm.xml"/>-->
+        <!--<mapping resource="com/customer/hibernate/beans/Worker.hbm.xml"/>-->
+        <!--<mapping resource="com/customer/hibernate/beans/Customer.hbm.xml"/>-->
+        <!--<mapping resource="com/customer/hibernate/beans/Order.hbm.xml"/>-->
+        <mapping resource="com/customer/hibernate/beans/n21/Customer.hbm.xml"/>
+        <mapping resource="com/customer/hibernate/beans/n21/Order.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>

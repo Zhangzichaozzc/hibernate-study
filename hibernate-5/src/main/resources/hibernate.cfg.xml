@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
+        <property name="connection.url">
+            jdbc:mysql://localhost:3306/hibernate?useUnicode=true&amp;characterEncoding=utf8
+        </property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+
+        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        <!--在持久对象 调用 delete 后，将 对象的 OID 置为 null-->
+        <property name="use_identifier_rollback">true</property>
+
+        <!--开启 Hibernate 的二级缓存-->
+        <property name="cache.use_second_level_cache">true</property>
+        <!--指定缓存插件的 RegionFactory-->
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+        </property>
+
+        <!--开启查询缓存-->
+        <property name="cache.use_query_cache">true</property>
+
+        <!--hibernate 管理 Session 的方式， thread 为将 Session 对象和本地线程进行绑定-->
+        <!--在跟 Spring 集成之后不需要再配置该属性-->
+        <property name="current_session_context_class">thread</property>
+
+        <mapping resource="com/customer/hibernate/beans/Employee.hbm.xml"/>
+        <mapping resource="com/customer/hibernate/beans/Department.hbm.xml"/>
+
+        <!--设置类的缓存-->
+        <class-cache class="com.customer.hibernate.beans.Employee" usage="read-only"/>
+
+        <!--设置集合缓存,在设置集合缓存的时候需要将集合元素的类的缓存也设置上，设置集合缓存的方式为 类的全限定名加集合属性名-->
+        <class-cache class="com.customer.hibernate.beans.Department" usage="read-write"/>
+        <collection-cache collection="com.customer.hibernate.beans.Department.employees" usage="read-write"/>
+
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.customer.hibernate.beans.one2one.primary.Manager" table="tbl_mgr">
+        <id name="mgrId" type="java.lang.Integer" column="mgr_id">
+            <generator class="native"/>
+        </id>
+        <property name="mgrName" type="java.lang.String" column="mgr_name"/>
+        <!--property-ref 属性指定使用被关联实体的主键以外的字段作为关联字段-->
+        <one-to-one name="dept" class="com.customer.hibernate.beans.one2one.primary.Department"/>
+    </class>
+</hibernate-mapping>

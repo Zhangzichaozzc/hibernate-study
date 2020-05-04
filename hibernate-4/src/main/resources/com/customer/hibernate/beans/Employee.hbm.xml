@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.customer.hibernate.beans.Employee" table="tbl_emp">
+        <id name="id" type="java.lang.Integer" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="java.lang.String" column="name"/>
+        <property name="salary" type="float" column="salary"/>
+        <property name="email" type="java.lang.String" column="email"/>
+        <many-to-one name="department" class="com.customer.hibernate.beans.Department" column="dept_id"/>
+    </class>
+
+    <query name="empBySalary">from Employee e where e.salary &lt; :maxSal and e.salary &gt; :minSal</query>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.customer.hibernate.beans.n21.Customer" table="tbl_customer">
+        <id name="customerId" type="java.lang.Integer" column="customer_id">
+            <generator class="native"/>
+        </id>
+        <property name="customerName" type="java.lang.String" column="customer_name"/>
+
+        <!--设置1对多关联关系-->
+        <!--name 属性指定 集合的属性名称-->
+        <!--table 指定多的一方的表名-->
+        <!--iverse=true 表示本对象不维护关联关系，一般建议由多的一方来维护关联关系-->
+        <!--cascade 属性可以设置级联操作，开发中不建议使用该属性来进行级联操作，建议手动操作
+            常用取值:
+                delete: 级联删除，在删除持久对象的同时把级联属性的对应对象也就行删除
+                delete-orphan: 可以在一的一方把多的一方的集合清空的时候删除多的一方的数据
+                save-update: 在保存的时候，可以将级联属性的数据表中的数据也进行保存
+        -->
+        <!--order-by 属性指定在查询级联属性集合的时候，集合元素的排序方式，order-by 中指定的是列名，不是类中的属性名-->
+        <set name="orders" table="tbl_order" inverse="true" order-by="order_name">
+            <!--key 的 column 属性指定多的一方的表中外键列名称-->
+            <key column="customer_id"/>
+            <!--one-to-many的class 指定 多的一方的对象的类名-->
+            <one-to-many class="com.customer.hibernate.beans.n21.Order"/>
+        </set>
+    </class>
+</hibernate-mapping>
